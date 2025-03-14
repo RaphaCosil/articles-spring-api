@@ -1,70 +1,64 @@
-CREATE TABLE User (
-                      user_id INT AUTO_INCREMENT PRIMARY KEY,
-                      name VARCHAR(255) NOT NULL,
-                      email VARCHAR(255) NOT NULL UNIQUE,
-                      password VARCHAR(255) NOT NULL,
-                      role VARCHAR(255) NOT NULL,
-                      study_area VARCHAR(255),
-                      created_at DATE,
-                      updated_at DATE
+CREATE TABLE user (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(255) NOT NULL,
+    study_area VARCHAR(255),
+    created_at DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATE
 );
 
-CREATE TABLE Article (
-                         article_id INT AUTO_INCREMENT PRIMARY KEY,
-                         sender_id INT NOT NULL,
-                         title VARCHAR(255) NOT NULL,
-                         content TEXT NOT NULL,
-                         created_at DATE NOT NULL,
-                         updated_at DATE,
-                         FOREIGN KEY (sender_id) REFERENCES User(user_id) ON DELETE CASCADE
+CREATE TABLE article (
+    article_id INT AUTO_INCREMENT PRIMARY KEY,
+    sender_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    content VARCHAR(2550) NOT NULL,
+    created_at DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATE,
+    FOREIGN KEY (sender_id) REFERENCES user(user_id) ON DELETE CASCADE
 );
 
-CREATE TABLE Key_Words (
-                           key_word_id INT AUTO_INCREMENT PRIMARY KEY,
-                           article_id INT NOT NULL,
-                           content VARCHAR(255) NOT NULL,
-                           FOREIGN KEY (article_id) REFERENCES Article(article_id) ON DELETE CASCADE
+CREATE TABLE key_word (
+   key_word_id INT AUTO_INCREMENT PRIMARY KEY,
+   article_id INT NOT NULL,
+   content VARCHAR(255) NOT NULL,
+   created_at DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   FOREIGN KEY (article_id) REFERENCES article(article_id) ON DELETE CASCADE
 );
 
-CREATE TABLE Attachment (
-                            attachment_id INT AUTO_INCREMENT PRIMARY KEY,
-                            article_id INT NOT NULL,
-                            link VARCHAR(255) NOT NULL,
-                            description VARCHAR(255) NOT NULL,
-                            FOREIGN KEY (article_id) REFERENCES Article(article_id) ON DELETE CASCADE
+CREATE TABLE attachment (
+    attachment_id INT AUTO_INCREMENT PRIMARY KEY,
+    article_id INT NOT NULL,
+    link VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    created_at DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (article_id) REFERENCES article(article_id) ON DELETE CASCADE
 );
 
-CREATE TABLE Comments (
-                          comment_id INT AUTO_INCREMENT PRIMARY KEY,
-                          article_id INT NOT NULL,
-                          user_id INT NOT NULL,
-                          content TEXT NOT NULL,
-                          created_at DATE NOT NULL,
-                          FOREIGN KEY (article_id) REFERENCES Article(article_id) ON DELETE CASCADE,
-                          FOREIGN KEY (user_id) REFERENCES User(user_id) ON DELETE CASCADE
+CREATE TABLE comment (
+    comment_id INT AUTO_INCREMENT PRIMARY KEY,
+    article_id INT NOT NULL,
+    user_id INT NOT NULL,
+    content VARCHAR(255) NOT NULL,
+    created_at DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATE,
+    FOREIGN KEY (article_id) REFERENCES article(article_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE
 );
 
-CREATE TABLE Visualization (
-                               visualization_id INT AUTO_INCREMENT PRIMARY KEY,
-                               article_id INT NOT NULL,
-                               user_id INT NOT NULL,
-                               created_at DATE NOT NULL,
-                               FOREIGN KEY (article_id) REFERENCES Article(article_id) ON DELETE CASCADE,
-                               FOREIGN KEY (user_id) REFERENCES User(user_id) ON DELETE CASCADE
-);
-
-INSERT INTO User (name, email, password, role, study_area, created_at, updated_at)
+INSERT INTO user (name, email, password, role, study_area, created_at, updated_at)
 VALUES
-    ('Alice Johnson', 'alice.johnson@example.com', 'password123', 'Writer', 'Software Engineering', '2025-02-01', '2025-02-01'),
+    ('Alice Johnson', 'alice.johnson@example.com', 'password123', 'Writer', 'Software Engineering', '2025-02-01', null),
     ('Bob Smith', 'bob.smith@example.com', 'password456', 'Revisor', 'Cybersecurity', '2025-02-02', '2025-02-02'),
-    ('Charlie Davis', 'charlie.davis@example.com', 'password789', 'Guest', 'Data Science', '2025-02-03', '2025-02-03'),
-    ('David Miller', 'david.miller@example.com', 'password101', 'Writer', 'Data Engineering', '2025-02-04', '2025-02-04'),
+    ('Charlie Davis', 'charlie.davis@example.com', 'password789', 'Guest', 'Data Science', '2025-02-03', null),
+    ('David Miller', 'david.miller@example.com', 'password101', 'Writer', 'Data Engineering', '2025-02-04', null),
     ('Eva Green', 'eva.green@example.com', 'password102', 'Revisor', 'Cloud Computing', '2025-02-05', '2025-02-05'),
-    ('Frank White', 'frank.white@example.com', 'password103', 'Guest', 'Machine Learning', '2025-02-06', '2025-02-06'),
+    ('Frank White', 'frank.white@example.com', 'password103', 'Guest', 'Machine Learning', '2025-02-06', null),
     ('Grace Lee', 'grace.lee@example.com', 'password104', 'Writer', 'DevOps', '2025-02-07', '2025-02-07'),
     ('Helen Black', 'helen.black@example.com', 'password105', 'Revisor', 'AI', '2025-02-08', '2025-02-08');
 
-INSERT INTO Article (user_id, title, content, created_at, updated_at)
+INSERT INTO article (sender_id, title, content, created_at, updated_at)
 VALUES
     (7, 'Introduction to Cloud Computing', 'Cloud computing allows businesses to scale and save costs. It is a model that delivers computing services over the internet.', '2025-02-01', '2025-02-01'),
     (7, 'Understanding Blockchain Technology', 'Blockchain is a decentralized digital ledger technology. It enables secure transactions and is the backbone of cryptocurrencies.', '2025-02-02', '2025-02-02'),
@@ -77,43 +71,43 @@ VALUES
     (4, 'Big Data and Its Impact on Business', 'Big Data refers to large, complex data sets that can be analyzed for insights. In business, Big Data is transforming industries by enabling data-driven decision-making.', '2025-02-09', '2025-02-09'),
     (1, 'IoT and Smart Cities', 'The Internet of Things (IoT) is driving the creation of smart cities. Sensors and devices are connected to the internet, providing data to improve urban living.', '2025-02-10', '2025-02-10');
 
-INSERT INTO Key_Words (article_id, content)
+INSERT INTO key_word (article_id, content, created_at)
 VALUES
-    (1, 'Cloud Computing'),
-    (1, 'Virtualization'),
-    (2, 'Blockchain'),
-    (2, 'Cryptocurrency'),
-    (3, 'Artificial Intelligence'),
-    (3, 'Machine Learning'),
-    (4, 'Cybersecurity'),
-    (4, 'Data Protection'),
-    (5, 'DevOps'),
-    (5, 'Automation'),
-    (6, 'Healthcare'),
-    (6, 'Blockchain'),
-    (7, 'Quantum Computing'),
-    (7, 'Quantum Algorithms'),
-    (8, 'Web Development'),
-    (8, 'Frameworks'),
-    (9, 'Big Data'),
-    (9, 'Business Analytics'),
-    (10, 'Internet of Things'),
-    (10, 'Smart Cities');
+    (1, 'Cloud Computing', '2025-02-01'),
+    (1, 'Virtualization', '2025-02-01'),
+    (2, 'Blockchain', '2025-02-02'),
+    (2, 'Cryptocurrency', '2025-02-02'),
+    (3, 'Artificial Intelligence', '2025-02-03'),
+    (3, 'Machine Learning', '2025-02-03'),
+    (4, 'Cybersecurity', '2025-02-04'),
+    (4, 'Data Protection', '2025-02-04'),
+    (5, 'DevOps', '2025-02-05'),
+    (5, 'Automation', '2025-02-05'),
+    (6, 'Healthcare', '2025-02-06'),
+    (6, 'Blockchain', '2025-02-06'),
+    (7, 'Quantum Computing', '2025-02-07'),
+    (7, 'Quantum Algorithms', '2025-02-07'),
+    (8, 'Web Development', '2025-02-08'),
+    (8, 'Frameworks', '2025-02-08'),
+    (9, 'Big Data', '2025-02-09'),
+    (9, 'Business Analytics', '2025-02-09'),
+    (10, 'Internet of Things', '2025-02-10'),
+    (10, 'Smart Cities', '2025-02-10');
 
-INSERT INTO Attachment (article_id, link, description)
+INSERT INTO attachment (article_id, link, description, created_at)
 VALUES
-    (1, 'https://example.com/cloud-computing-intro', 'Introductory article on cloud computing'),
-    (2, 'https://example.com/blockchain-tech', 'Deep dive into blockchain technology'),
-    (3, 'https://example.com/ai-and-machine-learning', 'Explains the role of AI in data science'),
-    (4, 'https://example.com/cybersecurity-best-practices', 'Best practices for securing your data'),
-    (5, 'https://example.com/devops-introduction', 'A guide to understanding DevOps'),
-    (6, 'https://example.com/blockchain-healthcare', 'The application of blockchain in healthcare'),
-    (7, 'https://example.com/quantum-computing-future', 'Insights into the future of quantum computing'),
-    (8, 'https://example.com/web-dev-trends', 'Latest trends in web development'),
-    (9, 'https://example.com/big-data-business', 'How Big Data impacts businesses'),
-    (10, 'https://example.com/iot-smart-cities', 'The role of IoT in smart cities');
+    (1, 'https://example.com/cloud-computing-intro', 'Introductory article on cloud computing', '2025-02-01'),
+    (2, 'https://example.com/blockchain-tech', 'Deep dive into blockchain technology', '2025-02-02'),
+    (3, 'https://example.com/ai-and-machine-learning', 'Explains the role of AI in data science', '2025-02-03'),
+    (4, 'https://example.com/cybersecurity-best-practices', 'Best practices for securing your data', '2025-02-04'),
+    (5, 'https://example.com/devops-introduction', 'A guide to understanding DevOps', '2025-02-05'),
+    (6, 'https://example.com/blockchain-healthcare', 'The application of blockchain in healthcare', '2025-02-06'),
+    (7, 'https://example.com/quantum-computing-future', 'Insights into the future of quantum computing', '2025-02-07'),
+    (8, 'https://example.com/web-dev-trends', 'Latest trends in web development', '2025-02-08'),
+    (9, 'https://example.com/big-data-business', 'How Big Data impacts businesses', '2025-02-09'),
+    (10, 'https://example.com/iot-smart-cities', 'The role of IoT in smart cities', '2025-02-10');
 
-INSERT INTO Comments (article_id, user_id, content, created_at)
+INSERT INTO comment (article_id, user_id, content, created_at)
 VALUES
     (1, 1, 'Great article! Very informative on cloud computing.', '2025-02-01'),
     (1, 2, 'Clear and concise explanation. Thanks for sharing!', '2025-02-01'),
@@ -135,26 +129,3 @@ VALUES
     (9, 1, 'Big Data has massive potential to drive business decisions.', '2025-02-09'),
     (10, 2, 'IoT will make cities smarter and more efficient.', '2025-02-10'),
     (10, 3, 'Smart cities are the future, and IoT is the backbone of this evolution.', '2025-02-10');
-
-INSERT INTO Visualization (article_id, user_id, created_at)
-VALUES
-    (1, 1, '2025-02-01'),
-    (1, 2, '2025-02-01'),
-    (2, 1, '2025-02-02'),
-    (2, 3, '2025-02-02'),
-    (3, 2, '2025-02-03'),
-    (3, 1, '2025-02-03'),
-    (4, 1, '2025-02-04'),
-    (4, 2, '2025-02-04'),
-    (5, 3, '2025-02-05'),
-    (5, 1, '2025-02-05'),
-    (6, 2, '2025-02-06'),
-    (6, 1, '2025-02-06'),
-    (7, 3, '2025-02-07'),
-    (7, 2, '2025-02-07'),
-    (8, 1, '2025-02-08'),
-    (8, 3, '2025-02-08'),
-    (9, 2, '2025-02-09'),
-    (9, 3, '2025-02-09'),
-    (10, 1, '2025-02-10'),
-    (10, 2, '2025-02-10');
