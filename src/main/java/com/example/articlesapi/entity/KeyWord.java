@@ -20,7 +20,6 @@ public class KeyWord {
     @Column(name = "key_word_id")
     private int keyWordId;
 
-    @Column(name = "article_id")
     @NotNull(message = "Article ID is required")
     @JoinColumn(name = "article_id")
     @ManyToOne

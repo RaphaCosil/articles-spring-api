@@ -4,18 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ffca7b7-754c-416c-b543-c713cbe2eef7" name="Changes" comment="Adding controllers, contracts, repositories and services">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/dto/UserGetDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/dto/UserPostDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/dto/UserUpdateDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/exception/NotFoundException.java" afterDir="false" />
+    <list default="true" id="3ffca7b7-754c-416c-b543-c713cbe2eef7" name="Changes" comment="Adding user flow">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/schema.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/contract/UserContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/contract/UserContract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/ArticlesApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/ArticlesApiApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/repository/ArticleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/repository/ArticleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/entity/Article.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/entity/Article.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/entity/Attachment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/entity/Attachment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/entity/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/entity/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/entity/KeyWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/entity/KeyWord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/repository/AttachmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/repository/AttachmentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/repository/CommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/repository/CommentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/repository/KeyWordRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/repository/KeyWordRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/service/ArticleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/service/ArticleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,32 +53,50 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/raphaelsilva-ieg/OneDrive - Instituto Germinare/GitHubRepo/springStudies/articles-api/src/main/java/com/example/articlesapi/repository&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;cdc60ca0a62b1c7457652d8882b84302&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelOrder2": "2",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RequestMappingsPanelWidth2": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.codeium.enabled": "true",
+    "last_opened_file_path": "C:/Users/raphaelsilva-ieg/OneDrive - Instituto Germinare/github-repositories/backend-studies/articles-api",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "spring.configuration.checksum": "c25310faf16ddd06dce04dc39a871724",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\raphaelsilva-ieg\OneDrive - Instituto Germinare\GitHubRepo\springStudies\articles-api\src\main\java\com\example\articlesapi\repository" />
       <recent name="C:\Users\raphaelsilva-ieg\OneDrive - Instituto Germinare\GitHubRepo\springStudies\articles-api\src\main\java\com\example\articlesapi\service" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.ArticlesApiApplication">
+    <configuration name="generated-requests | #70" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="70" requestIdentifier="#70" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="ArticlesApiApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="com.example.articles-api.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.articlesapi.ArticlesApiApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ArticlesApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="articles-api.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.articlesapi.ArticlesApiApplication" />
@@ -83,6 +104,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.generated-requests | #70" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -101,7 +127,15 @@
       <workItem from="1742087100533" duration="980000" />
       <workItem from="1742239777611" duration="1380000" />
       <workItem from="1742300062771" duration="3293000" />
-      <workItem from="1742307470390" duration="42000" />
+      <workItem from="1742307470390" duration="517000" />
+      <workItem from="1742331924546" duration="1766000" />
+      <workItem from="1742566110805" duration="436000" />
+      <workItem from="1742763372884" duration="593000" />
+      <workItem from="1742845038931" duration="1130000" />
+      <workItem from="1742850227512" duration="1688000" />
+      <workItem from="1743892394794" duration="2371000" />
+      <workItem from="1743961953219" duration="571000" />
+      <workItem from="1744138725557" duration="1424000" />
     </task>
     <task id="LOCAL-00001" summary="initial project">
       <created>1741897138143</created>
@@ -145,7 +179,14 @@
       <option name="project" value="LOCAL" />
       <updated>1742082719949</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Adding user flow">
+      <created>1742307848187</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1742307848187</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,6 +198,7 @@
     <MESSAGE value="Adding database database script and dependencies" />
     <MESSAGE value="Adding entities" />
     <MESSAGE value="Adding controllers, contracts, repositories and services" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding controllers, contracts, repositories and services" />
+    <MESSAGE value="Adding user flow" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding user flow" />
   </component>
 </project>

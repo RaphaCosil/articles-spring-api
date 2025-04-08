@@ -20,7 +20,6 @@ public class Article {
     @Column(name = "article_id")
     private int articleId;
 
-    @Column(name = "sender_id")
     @NotNull(message = "Sender ID is required")
     @ManyToOne
     @JoinColumn(name = "sender_id")

@@ -20,13 +20,11 @@ public class Comment {
     @Column(name = "comment_id")
     private int commentId;
 
-    @Column(name = "article_id")
     @NotNull(message = "Article ID is required")
     @ManyToOne
     @JoinColumn(name = "article_id")
     private Article article;
 
-    @Column(name = "user_id")
     @NotNull(message = "User ID is required")
     @ManyToOne
     @JoinColumn(name = "user_id")

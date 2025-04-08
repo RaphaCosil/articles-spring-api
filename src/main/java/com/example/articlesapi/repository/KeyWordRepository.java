@@ -1,4 +1,7 @@
 package com.example.articlesapi.repository;
 
-public interface KeyWordRepository {
+import com.example.articlesapi.entity.KeyWord;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface KeyWordRepository extends JpaRepository<KeyWord, Integer> {
 }

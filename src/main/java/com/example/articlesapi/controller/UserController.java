@@ -4,6 +4,7 @@ import com.example.articlesapi.contract.UserContract;
 import com.example.articlesapi.dto.UserGetDto;
 import com.example.articlesapi.dto.UserPostDto;
 import com.example.articlesapi.dto.UserUpdateDto;
+import com.example.articlesapi.exception.NotFoundException;
 import com.example.articlesapi.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -13,6 +14,7 @@ import java.util.List;
 public class UserController implements UserContract {
 
     UserService userService;
+
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -58,6 +60,8 @@ public class UserController implements UserContract {
             return ResponseEntity.ok(
                     userService.findById(id)
             );
+        } catch (NotFoundException e) {
+            return ResponseEntity.notFound().build();
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
@@ -68,8 +72,11 @@ public class UserController implements UserContract {
         try {
             userService.deleteById(id);
             return ResponseEntity.ok().build();
+        } catch (NotFoundException e) {
+            return ResponseEntity.notFound().build();
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
+
         }
     }
 }

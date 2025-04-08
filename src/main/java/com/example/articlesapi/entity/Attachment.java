@@ -20,7 +20,6 @@ public class Attachment {
     @Column(name = "attachment_id")
     private int attachmentId;
 
-    @Column(name = "article_id")
     @NotNull(message = "Article ID is required")
     @ManyToOne
     @JoinColumn(name = "article_id")
