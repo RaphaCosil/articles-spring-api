@@ -1,8 +1,8 @@
 package com.example.articlesapi.service;
 
-import com.example.articlesapi.dto.UserGetDto;
-import com.example.articlesapi.dto.UserPostDto;
-import com.example.articlesapi.dto.UserUpdateDto;
+import com.example.articlesapi.dto.user.UserGetDto;
+import com.example.articlesapi.dto.user.UserPostDto;
+import com.example.articlesapi.dto.user.UserUpdateDto;
 import com.example.articlesapi.entity.User;
 import com.example.articlesapi.exception.NotFoundException;
 import com.example.articlesapi.repository.UserRepository;

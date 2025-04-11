@@ -1,9 +1,9 @@
 package com.example.articlesapi.controller;
 
 import com.example.articlesapi.contract.UserContract;
-import com.example.articlesapi.dto.UserGetDto;
-import com.example.articlesapi.dto.UserPostDto;
-import com.example.articlesapi.dto.UserUpdateDto;
+import com.example.articlesapi.dto.user.UserGetDto;
+import com.example.articlesapi.dto.user.UserPostDto;
+import com.example.articlesapi.dto.user.UserUpdateDto;
 import com.example.articlesapi.exception.NotFoundException;
 import com.example.articlesapi.service.UserService;
 import org.springframework.http.ResponseEntity;

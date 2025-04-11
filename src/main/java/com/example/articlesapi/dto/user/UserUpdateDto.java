@@ -1,4 +1,4 @@
-package com.example.articlesapi.dto;
+package com.example.articlesapi.dto.user;
 
 import lombok.Data;
 import lombok.Getter;
@@ -9,11 +9,11 @@ import java.sql.Date;
 @Data
 @Getter
 @Setter
-public class UserPostDto {
+public class UserUpdateDto {
     private String name;
     private String email;
     private String password;
     private String role;
     private String studyArea;
-    private Date createdAt;
+    private Date updatedAt;
 }

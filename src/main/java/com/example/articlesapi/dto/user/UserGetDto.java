@@ -1,4 +1,4 @@
-package com.example.articlesapi.dto;
+package com.example.articlesapi.dto.user;
 
 import lombok.Data;
 import lombok.Getter;
