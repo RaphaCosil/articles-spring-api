@@ -4,6 +4,8 @@ import com.example.articlesapi.contract.UserContract;
 import com.example.articlesapi.dto.user.UserGetDto;
 import com.example.articlesapi.dto.user.UserPostDto;
 import com.example.articlesapi.dto.user.UserUpdateDto;
+import com.example.articlesapi.exception.BadRequestException;
+import com.example.articlesapi.exception.InternalServerException;
 import com.example.articlesapi.exception.NotFoundException;
 import com.example.articlesapi.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +28,7 @@ public class UserController implements UserContract {
     ) {
         try {
             if (bindingResult.hasErrors()) {
-                return ResponseEntity.badRequest().build();
+                throw new BadRequestException();
             } else {
                 userService.save(userPostDto);
                 ResponseEntity.ok(
@@ -34,7 +36,7 @@ public class UserController implements UserContract {
                 );
             }
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
+            throw new InternalServerException();
         }
         return null;
     }
@@ -48,9 +50,13 @@ public class UserController implements UserContract {
 
     @Override
     public ResponseEntity<UserGetDto> getUserById(int id) {
-        return ResponseEntity.ok(
-                userService.findById(id)
-        );
+        try {
+            return ResponseEntity.ok(
+                    userService.findById(id)
+            );
+        } catch (NotFoundException e) {
+            throw new NotFoundException();
+        }
     }
 
     @Override
@@ -61,9 +67,9 @@ public class UserController implements UserContract {
                     userService.findById(id)
             );
         } catch (NotFoundException e) {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException();
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
+            throw new InternalServerException();
         }
     }
 

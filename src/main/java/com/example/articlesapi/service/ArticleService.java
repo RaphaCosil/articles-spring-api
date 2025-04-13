@@ -9,6 +9,7 @@ import com.example.articlesapi.exception.NotFoundException;
 import com.example.articlesapi.repository.ArticleRepository;
 import com.example.articlesapi.repository.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public class ArticleService {
@@ -19,8 +20,30 @@ public class ArticleService {
         this.articleRepository = articleRepository;
     }
 
+    public void save(ArticlePostDto articlePostDto) {
+        articleRepository.save(
+                parseArticleToArticlePostDto(articlePostDto)
+        );
+    }
+
+    public void update(int id, ArticleUpdateDto articleUpdateDto) {
+        Article existingArticle = articleRepository.findById(id)
+                .orElseThrow(NotFoundException::new);
+        parseArticleToArticleUpdateDto(
+                existingArticle,
+                articleUpdateDto
+        );
+        articleRepository.save(existingArticle);
+    }
+
+    public void deleteById(int id) {
+        articleRepository.deleteById(id);
+    }
+
     public Iterable<ArticleGetDto> findAll() {
-        return articleRepository.findAll().stream().map(this::parseArticleGetDtoToArticle).toList();
+        return parseArticlesGetDtoToArticles(
+                articleRepository.findAll()
+        );
     }
 
     public ArticleGetDto findById(int id) {
@@ -32,24 +55,26 @@ public class ArticleService {
         }
     }
 
-    public void save(ArticlePostDto articlePostDto) {
-        articleRepository.save(
-                parseArticleToArticlePostDto(articlePostDto)
+    public Iterable<Article> findByTitleContaining(String title) {
+        return articleRepository.findByTitleContaining(title);
+    }
+
+    public Iterable<ArticleGetDto> findByContentContaining(String content) {
+        return parseArticlesGetDtoToArticles(
+                articleRepository.findByContentContaining(content)
         );
     }
 
-    public void update(int id, ArticleUpdateDto articleUpdateDto) {
-        Article existingArticle = articleRepository.findById(id).orElse(null);
-        if (existingArticle != null) {
-            existingArticle = parseArticleToArticleUpdateDto(articleUpdateDto);
-            articleRepository.save(existingArticle);
-        } else {
-            throw new NotFoundException();
-        }
+    public Iterable<ArticleGetDto> findByKeywords(List<String> keywords) {
+        return parseArticlesGetDtoToArticles(
+                articleRepository.findByKeywords(keywords)
+        );
     }
 
-    public void deleteById(int id) {
-        articleRepository.deleteById(id);
+    public Iterable<ArticleGetDto> findByKeywordsFilter(List<String> keywords) {
+        return parseArticlesGetDtoToArticles(
+                articleRepository.findByKeywordsFilter(keywords, keywords.size())
+        );
     }
 
     private ArticleGetDto parseArticleGetDtoToArticle(Article article) {
@@ -61,6 +86,10 @@ public class ArticleService {
                 article.getCreatedAt(),
                 article.getUpdatedAt()
         );
+    }
+
+    private Iterable<ArticleGetDto> parseArticlesGetDtoToArticles(List<Article> articles) {
+        return articles.stream().map(this::parseArticleGetDtoToArticle).toList();
     }
 
     private Article parseArticleToArticlePostDto(ArticlePostDto articlePostDto) {
@@ -75,8 +104,7 @@ public class ArticleService {
         return article;
     }
 
-    private Article parseArticleToArticleUpdateDto(ArticleUpdateDto articleUpdateDto) {
-        Article article = new Article();
+    private Article parseArticleToArticleUpdateDto(Article article, ArticleUpdateDto articleUpdateDto) {
         article.setTitle(articleUpdateDto.title());
         article.setContent(articleUpdateDto.content());
         article.setUpdatedAt(articleUpdateDto.updatedAt());

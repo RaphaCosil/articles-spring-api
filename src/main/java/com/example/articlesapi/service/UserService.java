@@ -26,13 +26,14 @@ public class UserService {
     }
 
     public void update(int id, UserUpdateDto userUpdateDto) {
-        User existingUser = userRepository.findById(id).orElse(null);
-        if (existingUser != null) {
-            existingUser = parseUserToUserUpdateDto(userUpdateDto);
-            userRepository.save(existingUser);
-        } else {
-            throw new NotFoundException();
-        }
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(NotFoundException::new);
+        existingUser = parseUserToUserUpdateDto(existingUser, userUpdateDto);
+        userRepository.save(existingUser);
+    }
+
+    public void deleteById(int id) {
+        userRepository.deleteById(id);
     }
 
     public List<UserGetDto> findAll() {
@@ -44,15 +45,6 @@ public class UserService {
         return userGetDtos;
     }
 
-    public UserGetDto findByEmail(String email) {
-        Optional<User> user = userRepository.findByEmail(email);
-        if (user.isPresent()) {
-            return parseUserGetDtoToUser(user.get());
-        } else {
-            throw new NotFoundException();
-        }
-    }
-
     public UserGetDto findById(int id) {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
@@ -62,8 +54,13 @@ public class UserService {
         }
     }
 
-    public void deleteById(int id) {
-        userRepository.deleteById(id);
+    public UserGetDto findByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isPresent()) {
+            return parseUserGetDtoToUser(user.get());
+        } else {
+            throw new NotFoundException();
+        }
     }
 
     public User parseUserToUserPostDto(UserPostDto userPostDto) {
@@ -76,8 +73,7 @@ public class UserService {
         user.setCreatedAt(Date.valueOf(LocalDate.now()));
         return user;
     }
-    public User parseUserToUserUpdateDto(UserUpdateDto userUpdateDto) {
-        User user = new User();
+    public User parseUserToUserUpdateDto(User user, UserUpdateDto userUpdateDto) {
         user.setName(userUpdateDto.name());
         user.setEmail(userUpdateDto.email());
         user.setPassword(userUpdateDto.password());
@@ -87,7 +83,7 @@ public class UserService {
         return user;
     }
 
-    public UserGetDto parseUserGetDtoToUser(User user) {
+    private UserGetDto parseUserGetDtoToUser(User user) {
         return new UserGetDto(
                 user.getUserId(),
                 user.getName(),
@@ -98,5 +94,9 @@ public class UserService {
                 user.getCreatedAt(),
                 user.getUpdatedAt()
         );
+    }
+
+    private Iterable<UserGetDto> parseUserGetDtoToUserGetDto(List<User> users) {
+        return users.stream().map(this::parseUserGetDtoToUser).toList();
     }
 }

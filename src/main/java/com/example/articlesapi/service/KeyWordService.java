@@ -1,6 +1,5 @@
 package com.example.articlesapi.service;
 
-import com.example.articlesapi.dto.article.ArticleGetDto;
 import com.example.articlesapi.dto.keyword.KeyWordGetDto;
 import com.example.articlesapi.dto.keyword.KeyWordPostDto;
 import com.example.articlesapi.entity.Article;
@@ -9,6 +8,7 @@ import com.example.articlesapi.exception.NotFoundException;
 import com.example.articlesapi.repository.ArticleRepository;
 import com.example.articlesapi.repository.KeyWordRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public class KeyWordService {
@@ -24,6 +24,10 @@ public class KeyWordService {
         keyWordRepository.save(parseKeyWordToKeyWordPostDto(keyWordPostDto));
     }
 
+    public void deleteById(int id) {
+        keyWordRepository.deleteById(id);
+    }
+
     public Iterable<KeyWordGetDto> findAll() {
         return keyWordRepository.findAll().stream().map(this::parseKeyWordToKeyWordGetDto).toList();
     }
@@ -37,9 +41,15 @@ public class KeyWordService {
         }
     }
 
-    public void deleteById(int id) {
-        keyWordRepository.deleteById(id);
+    public Iterable<KeyWordGetDto> findByArticleId(int articleId) {
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(NotFoundException::new);
+
+        return parseKeyWordToKeyWordGetDto(
+                keyWordRepository.findByArticle(article)
+        );
     }
+
     private KeyWord parseKeyWordToKeyWordPostDto(KeyWordPostDto keyWordPostDto) {
         Article article = articleRepository.findById(keyWordPostDto.articleId()).orElse(null);
         if (article == null) {
@@ -59,5 +69,9 @@ public class KeyWordService {
                 keyWord.getCreatedAt(),
                 keyWord.getUpdatedAt()
         );
+    }
+
+    private List<KeyWordGetDto> parseKeyWordToKeyWordGetDto(List<KeyWord> keyWords) {
+        return keyWords.stream().map(this::parseKeyWordToKeyWordGetDto).toList();
     }
 }
