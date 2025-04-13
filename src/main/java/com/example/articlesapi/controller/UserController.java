@@ -28,9 +28,9 @@ public class UserController implements UserContract {
             if (bindingResult.hasErrors()) {
                 return ResponseEntity.badRequest().build();
             } else {
-                userService.saveUser(userPostDto);
+                userService.save(userPostDto);
                 ResponseEntity.ok(
-                        userService.findByEmail(userPostDto.getEmail())
+                        userService.findByEmail(userPostDto.email())
                 );
             }
         } catch (Exception e) {

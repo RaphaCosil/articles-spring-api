@@ -21,8 +21,18 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void saveUser(UserPostDto userPostDto) {
+    public void save(UserPostDto userPostDto) {
         userRepository.save(parseUserToUserPostDto(userPostDto));
+    }
+
+    public void update(int id, UserUpdateDto userUpdateDto) {
+        User existingUser = userRepository.findById(id).orElse(null);
+        if (existingUser != null) {
+            existingUser = parseUserToUserUpdateDto(userUpdateDto);
+            userRepository.save(existingUser);
+        } else {
+            throw new NotFoundException();
+        }
     }
 
     public List<UserGetDto> findAll() {
@@ -56,48 +66,37 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public void update(int id, UserUpdateDto userUpdateDto) {
-        User existingUser = userRepository.findById(id).orElse(null);
-        if (existingUser != null) {
-            existingUser = parseUserToUserUpdateDto(userUpdateDto);
-            userRepository.save(existingUser);
-        } else {
-            throw new NotFoundException();
-        }
-    }
-
     public User parseUserToUserPostDto(UserPostDto userPostDto) {
         User user = new User();
-        user.setName(userPostDto.getName());
-        user.setEmail(userPostDto.getEmail());
-        user.setPassword(userPostDto.getPassword());
-        user.setRole(userPostDto.getRole());
-        user.setStudyArea(userPostDto.getStudyArea());
+        user.setName(userPostDto.name());
+        user.setEmail(userPostDto.email());
+        user.setPassword(userPostDto.password());
+        user.setRole(userPostDto.role());
+        user.setStudyArea(userPostDto.studyArea());
         user.setCreatedAt(Date.valueOf(LocalDate.now()));
         return user;
     }
     public User parseUserToUserUpdateDto(UserUpdateDto userUpdateDto) {
         User user = new User();
-        user.setName(userUpdateDto.getName());
-        user.setEmail(userUpdateDto.getEmail());
-        user.setPassword(userUpdateDto.getPassword());
-        user.setRole(userUpdateDto.getRole());
-        user.setStudyArea(userUpdateDto.getStudyArea());
+        user.setName(userUpdateDto.name());
+        user.setEmail(userUpdateDto.email());
+        user.setPassword(userUpdateDto.password());
+        user.setRole(userUpdateDto.role());
+        user.setStudyArea(userUpdateDto.studyArea());
         user.setUpdatedAt(Date.valueOf(LocalDate.now()));
         return user;
     }
 
     public UserGetDto parseUserGetDtoToUser(User user) {
-        UserGetDto userGetDto = new UserGetDto();
-        userGetDto.setUserId(user.getUserId());
-        userGetDto.setName(user.getName());
-        userGetDto.setEmail(user.getEmail());
-        userGetDto.setPassword(user.getPassword());
-        userGetDto.setRole(user.getRole());
-        userGetDto.setStudyArea(user.getStudyArea());
-        userGetDto.setCreatedAt(user.getCreatedAt());
-        userGetDto.setUpdatedAt(user.getUpdatedAt());
-        return userGetDto;
+        return new UserGetDto(
+                user.getUserId(),
+                user.getName(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getRole(),
+                user.getStudyArea(),
+                user.getCreatedAt(),
+                user.getUpdatedAt()
+        );
     }
-
 }
