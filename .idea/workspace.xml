@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ffca7b7-754c-416c-b543-c713cbe2eef7" name="Changes" comment="Adding all queries in repositories and services and GlobalExceptionHandler">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/contract/ArticleContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/contract/ArticleContract.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/contract/KeyWordContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/contract/KeyWordContract.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/contract/UserContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/contract/UserContract.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/controller/ArticleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/controller/ArticleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/controller/KeyWordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/controller/KeyWordController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/exception/BadRequestException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/exception/BadRequestException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/service/ArticleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/service/ArticleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/service/KeyWordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/articlesapi/service/KeyWordService.java" afterDir="false" />
+    <list default="true" id="3ffca7b7-754c-416c-b543-c713cbe2eef7" name="Changes" comment="Adding controllers and contracts">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/articles_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +141,7 @@
       <workItem from="1744499882376" duration="1849000" />
       <workItem from="1744501775608" duration="1328000" />
       <workItem from="1744503185896" duration="326000" />
-      <workItem from="1744550762754" duration="5162000" />
+      <workItem from="1744550762754" duration="6478000" />
     </task>
     <task id="LOCAL-00001" summary="initial project">
       <created>1741897138143</created>
@@ -234,7 +227,14 @@
       <option name="project" value="LOCAL" />
       <updated>1744554087258</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Adding controllers and contracts">
+      <created>1744557366759</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1744557366759</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,7 +252,8 @@
     <MESSAGE value="Removing Attachment and Comment Entities, adding classes of the others entities" />
     <MESSAGE value="Adding service and dtos" />
     <MESSAGE value="Adding all queries in repositories and services and GlobalExceptionHandler" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding all queries in repositories and services and GlobalExceptionHandler" />
+    <MESSAGE value="Adding controllers and contracts" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding controllers and contracts" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
