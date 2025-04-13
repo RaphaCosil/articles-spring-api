@@ -62,7 +62,7 @@ A RESTful API built in **Java** using **Spring Boot**, responsible for managing:
 ## Setup
 
 1. Configure the database and environment variables in `application.properties`
-2. Create the database schema (`articles_db`)
+2. Create the database schema (`db`)
 3. Run the project:
 
 ```bash
