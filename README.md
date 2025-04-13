@@ -1,75 +1,75 @@
 # Articles API
 
-A RESTful API construída em **Java 21** usando **Spring Boot**, responsável por gerenciar:
+A RESTful API built in **Java** using **Spring Boot**, responsible for managing:
 
-- Usuários (`User`)
-- Artigos (`Article`)
-- Palavras-chave (`Keyword`)
+- Users (`User`)
+- Articles (`Article`)
+- Keywords (`Keyword`)
 
-## Estrutura do Projeto
+## Project Structure
 
 ```bash
 .
 ├── src/main/java/com/example/articlesapi/
-│   ├── config/                   # Configurações de aplicação
-│   ├── contract/                 # Interfaces dos endpoints (controllers)
-│   ├── controller/               # Controllers que implementam os contracts
+│   ├── config/                   # Application configuration
+│   ├── contract/                 # API endpoint interfaces (contracts)
+│   ├── controller/               # Controllers implementing the contracts
 │   ├── dto/                      # Data Transfer Objects
-│   ├── exception/                # Manipulação de exceções
-│   ├── model/                    # Entidades JPA
-│   ├── repository/               # Interfaces de acesso a dados (Spring Data JPA)
-│   └── service/                  # Regras de negócio
+│   ├── exception/                # Exception handling
+│   ├── model/                    # JPA Entities
+│   ├── repository/               # Data access interfaces (Spring Data JPA)
+│   └── service/                  # Business logic
 └── src/main/resources/
-└── application.properties    # Configurações de banco e aplicação
+└── application.properties        # Application and database configuration
 ```
 
-## Rotas da API
+## API Routes
 
 ### **`/user`**
 
-| Método | Rota               | Descrição             |
-|:---------|:--------------------|:----------------------|
-| GET     | `/user/`              | Listar todos os usuários |
-| GET     | `/user/{id}`          | Buscar usuário por ID    |
-| POST    | `/user/`              | Criar novo usuário        |
-| PUT     | `/user/{id}`          | Atualizar usuário         |
-| DELETE  | `/user/{id}`          | Remover usuário           |
+| Method | Route        | Description           |
+|:--------|:---------------|:----------------------|
+| GET    | `/user/`        | List all users          |
+| GET    | `/user/{id}`    | Get user by ID          |
+| POST   | `/user/`        | Create new user         |
+| PUT    | `/user/{id}`    | Update user             |
+| DELETE | `/user/{id}`    | Delete user             |
 
 ### **`/articles`**
 
-| Método | Rota                                      | Descrição                                     |
-|:---------|:--------------------------------------------|:------------------------------------------------|
-| GET     | `/articles/`                               | Listar todos os artigos                         |
-| GET     | `/articles/{id}`                           | Buscar artigo por ID                            |
-| POST    | `/articles/`                               | Criar novo artigo                                |
-| PUT     | `/articles/{id}`                           | Atualizar artigo                                 |
-| DELETE  | `/articles/{id}`                           | Remover artigo                                   |
-| GET     | `/articles/title/{title}`                  | Buscar artigos contendo o título                |
-| GET     | `/articles/content/{content}`              | Buscar artigos contendo o conteúdo              |
-| GET     | `/articles/keywords/{keywords}`            | Buscar artigos contendo qualquer keyword        |
-| GET     | `/articles/keywords-filter/{keywords}`     | Buscar artigos contendo todas as keywords       |
+| Method | Route                                  | Description                                  |
+|:--------|:------------------------------------------|:-----------------------------------------------|
+| GET    | `/articles/`                             | List all articles                             |
+| GET    | `/articles/{id}`                         | Get article by ID                             |
+| POST   | `/articles/`                             | Create new article                            |
+| PUT    | `/articles/{id}`                         | Update article                                |
+| DELETE | `/articles/{id}`                         | Delete article                                |
+| GET    | `/articles/title/{title}`                | Find articles containing title                |
+| GET    | `/articles/content/{content}`            | Find articles containing content              |
+| GET    | `/articles/keywords/{keywords}`          | Find articles containing any keyword          |
+| GET    | `/articles/keywords-filter/{keywords}`   | Find articles containing all specified keywords |
 
 ### **`/keywords`**
 
-| Método | Rota                            | Descrição                                |
-|:---------|:--------------------------------|:--------------------------------------------|
-| GET     | `/keywords/`                    | Listar todas as keywords                   |
-| GET     | `/keywords/{id}`                | Buscar keyword por ID                      |
-| POST    | `/keywords/`                    | Criar nova keyword                         |
-| DELETE  | `/keywords/{id}`                | Remover keyword                            |
-| GET     | `/keywords/article/{articleId}` | Listar keywords associadas a um artigo     |
+| Method | Route                               | Description                              |
+|:--------|:--------------------------------------|:---------------------------------------------|
+| GET    | `/keywords/`                         | List all keywords                          |
+| GET    | `/keywords/{id}`                     | Get keyword by ID                          |
+| POST   | `/keywords/`                         | Create new keyword                         |
+| DELETE | `/keywords/{id}`                     | Delete keyword                             |
+| GET    | `/keywords/article/{articleId}`      | List keywords associated with an article   |
 
 ## Setup
 
-1. Configure o banco e as variáveis no `application.properties`
-2. Crie o schema no banco (`articles_db`)
-3. Execute o projeto:
+1. Configure the database and environment variables in `application.properties`
+2. Create the database schema (`articles_db`)
+3. Run the project:
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-1. Acesse a documentação Swagger:
+4. Access Swagger documentation:
 
 ```
 http://localhost:8080/swagger-ui/index.html
