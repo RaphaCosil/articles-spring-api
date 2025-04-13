@@ -5,8 +5,6 @@ import com.example.articlesapi.dto.user.UserGetDto;
 import com.example.articlesapi.dto.user.UserPostDto;
 import com.example.articlesapi.dto.user.UserUpdateDto;
 import com.example.articlesapi.exception.BadRequestException;
-import com.example.articlesapi.exception.InternalServerException;
-import com.example.articlesapi.exception.NotFoundException;
 import com.example.articlesapi.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -22,67 +20,42 @@ public class UserController implements UserContract {
     }
 
     @Override
-    public ResponseEntity<UserGetDto> createUser(
+    public ResponseEntity<Void> save(
             UserPostDto userPostDto,
             BindingResult bindingResult
     ) {
-        try {
-            if (bindingResult.hasErrors()) {
-                throw new BadRequestException();
-            } else {
-                userService.save(userPostDto);
-                ResponseEntity.ok(
-                        userService.findByEmail(userPostDto.email())
-                );
-            }
-        } catch (Exception e) {
-            throw new InternalServerException();
+        if (bindingResult.hasErrors()) {
+            throw new BadRequestException(
+                    bindingResult.getFieldError().getDefaultMessage()
+            );
         }
-        return null;
+        userService.save(userPostDto);
+        return ResponseEntity.status(201).build();
     }
 
     @Override
-    public ResponseEntity<List<UserGetDto>> getAllUsers() {
+    public ResponseEntity<List<UserGetDto>> findAll() {
         return ResponseEntity.ok(
                 userService.findAll()
         );
     }
 
     @Override
-    public ResponseEntity<UserGetDto> getUserById(int id) {
-        try {
-            return ResponseEntity.ok(
-                    userService.findById(id)
-            );
-        } catch (NotFoundException e) {
-            throw new NotFoundException();
-        }
+    public ResponseEntity<UserGetDto> findById(int id) {
+        return ResponseEntity.ok(
+                userService.findById(id)
+        );
     }
 
     @Override
-    public ResponseEntity<UserGetDto> updateUser(int id, UserUpdateDto userUpdateDto) {
-        try {
-            userService.update(id, userUpdateDto);
-            return ResponseEntity.ok(
-                    userService.findById(id)
-            );
-        } catch (NotFoundException e) {
-            throw new NotFoundException();
-        } catch (Exception e) {
-            throw new InternalServerException();
-        }
+    public ResponseEntity<Void> update(int id, UserUpdateDto userUpdateDto) {
+        userService.update(id, userUpdateDto);
+        return ResponseEntity.ok().build();
     }
 
     @Override
-    public ResponseEntity<Void> deleteUser(int id) {
-        try {
-            userService.deleteById(id);
-            return ResponseEntity.ok().build();
-        } catch (NotFoundException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
-
-        }
+    public ResponseEntity<Void> delete(int id) {
+        userService.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }

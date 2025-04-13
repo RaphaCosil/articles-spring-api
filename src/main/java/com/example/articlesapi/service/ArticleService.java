@@ -29,18 +29,20 @@ public class ArticleService {
     public void update(int id, ArticleUpdateDto articleUpdateDto) {
         Article existingArticle = articleRepository.findById(id)
                 .orElseThrow(NotFoundException::new);
-        parseArticleToArticleUpdateDto(
-                existingArticle,
-                articleUpdateDto
+
+        articleRepository.save(
+                parseArticleToArticleUpdateDto(
+                        existingArticle,
+                        articleUpdateDto
+                )
         );
-        articleRepository.save(existingArticle);
     }
 
     public void deleteById(int id) {
         articleRepository.deleteById(id);
     }
 
-    public Iterable<ArticleGetDto> findAll() {
+    public List<ArticleGetDto> findAll() {
         return parseArticlesGetDtoToArticles(
                 articleRepository.findAll()
         );
@@ -55,23 +57,25 @@ public class ArticleService {
         }
     }
 
-    public Iterable<Article> findByTitleContaining(String title) {
-        return articleRepository.findByTitleContaining(title);
+    public List<ArticleGetDto> findByTitleContaining(String title) {
+        return parseArticlesGetDtoToArticles(
+                articleRepository.findByTitleContaining(title)
+        );
     }
 
-    public Iterable<ArticleGetDto> findByContentContaining(String content) {
+    public List<ArticleGetDto> findByContentContaining(String content) {
         return parseArticlesGetDtoToArticles(
                 articleRepository.findByContentContaining(content)
         );
     }
 
-    public Iterable<ArticleGetDto> findByKeywords(List<String> keywords) {
+    public List<ArticleGetDto> findByKeywords(List<String> keywords) {
         return parseArticlesGetDtoToArticles(
                 articleRepository.findByKeywords(keywords)
         );
     }
 
-    public Iterable<ArticleGetDto> findByKeywordsFilter(List<String> keywords) {
+    public List<ArticleGetDto> findByKeywordsFilter(List<String> keywords) {
         return parseArticlesGetDtoToArticles(
                 articleRepository.findByKeywordsFilter(keywords, keywords.size())
         );
@@ -88,7 +92,7 @@ public class ArticleService {
         );
     }
 
-    private Iterable<ArticleGetDto> parseArticlesGetDtoToArticles(List<Article> articles) {
+    private List<ArticleGetDto> parseArticlesGetDtoToArticles(List<Article> articles) {
         return articles.stream().map(this::parseArticleGetDtoToArticle).toList();
     }
 

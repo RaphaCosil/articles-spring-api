@@ -28,7 +28,7 @@ public class KeyWordService {
         keyWordRepository.deleteById(id);
     }
 
-    public Iterable<KeyWordGetDto> findAll() {
+    public List<KeyWordGetDto> findAll() {
         return keyWordRepository.findAll().stream().map(this::parseKeyWordToKeyWordGetDto).toList();
     }
 
@@ -41,7 +41,7 @@ public class KeyWordService {
         }
     }
 
-    public Iterable<KeyWordGetDto> findByArticleId(int articleId) {
+    public List<KeyWordGetDto> findByArticleId(int articleId) {
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(NotFoundException::new);
 
