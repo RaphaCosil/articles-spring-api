@@ -15,11 +15,11 @@ import java.sql.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "user")
+@Table(name = "customer")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "customer_id")
     private int userId;
 
     @NotNull(message = "User name is required")

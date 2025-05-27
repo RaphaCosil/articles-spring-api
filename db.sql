@@ -1,53 +1,53 @@
-CREATE TABLE user (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    role VARCHAR(255) NOT NULL,
-    study_area VARCHAR(255),
-    created_at DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATE
+CREATE TABLE customer (
+      customer_id SERIAL PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      email VARCHAR(255) NOT NULL UNIQUE,
+      password VARCHAR(255) NOT NULL,
+      role VARCHAR(255) NOT NULL,
+      study_area VARCHAR(255),
+      created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP
 );
 
 CREATE TABLE article (
-    article_id INT AUTO_INCREMENT PRIMARY KEY,
-    sender_id INT NOT NULL,
-    title VARCHAR(255) NOT NULL,
-    content VARCHAR(2550) NOT NULL,
-    created_at DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATE,
-    FOREIGN KEY (sender_id) REFERENCES user(user_id) ON DELETE CASCADE
+     article_id SERIAL PRIMARY KEY,
+     sender_id INT NOT NULL,
+     title VARCHAR(255) NOT NULL,
+     content TEXT NOT NULL,
+     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+     updated_at TIMESTAMP,
+     FOREIGN KEY (sender_id) REFERENCES customer(customer_id) ON DELETE CASCADE
 );
 
 CREATE TABLE key_word (
-   key_word_id INT AUTO_INCREMENT PRIMARY KEY,
-   article_id INT NOT NULL,
-   content VARCHAR(255) NOT NULL,
-   created_at DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-   FOREIGN KEY (article_id) REFERENCES article(article_id) ON DELETE CASCADE
+      key_word_id SERIAL PRIMARY KEY,
+      article_id INT NOT NULL,
+      content VARCHAR(255) NOT NULL,
+      created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (article_id) REFERENCES article(article_id) ON DELETE CASCADE
 );
 
 CREATE TABLE attachment (
-    attachment_id INT AUTO_INCREMENT PRIMARY KEY,
+    attachment_id SERIAL PRIMARY KEY,
     article_id INT NOT NULL,
     link VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL,
-    created_at DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (article_id) REFERENCES article(article_id) ON DELETE CASCADE
 );
 
 CREATE TABLE comment (
-    comment_id INT AUTO_INCREMENT PRIMARY KEY,
-    article_id INT NOT NULL,
-    user_id INT NOT NULL,
-    content VARCHAR(255) NOT NULL,
-    created_at DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATE,
-    FOREIGN KEY (article_id) REFERENCES article(article_id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE
+     comment_id SERIAL PRIMARY KEY,
+     article_id INT NOT NULL,
+     customer_id INT NOT NULL,
+     content VARCHAR(255) NOT NULL,
+     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+     updated_at TIMESTAMP,
+     FOREIGN KEY (article_id) REFERENCES article(article_id) ON DELETE CASCADE,
+     FOREIGN KEY (customer_id) REFERENCES customer(customer_id) ON DELETE CASCADE
 );
 
-INSERT INTO user (name, email, password, role, study_area, created_at, updated_at)
+INSERT INTO customer (name, email, password, role, study_area, created_at, updated_at)
 VALUES
     ('Alice Johnson', 'alice.johnson@example.com', 'password123', 'Writer', 'Software Engineering', '2025-02-01', null),
     ('Bob Smith', 'bob.smith@example.com', 'password456', 'Revisor', 'Cybersecurity', '2025-02-02', '2025-02-02'),
@@ -107,7 +107,7 @@ VALUES
     (9, 'https://example.com/big-data-business', 'How Big Data impacts businesses', '2025-02-09'),
     (10, 'https://example.com/iot-smart-cities', 'The role of IoT in smart cities', '2025-02-10');
 
-INSERT INTO comment (article_id, user_id, content, created_at)
+INSERT INTO comment (article_id, customer_id, content, created_at)
 VALUES
     (1, 1, 'Great article! Very informative on cloud computing.', '2025-02-01'),
     (1, 2, 'Clear and concise explanation. Thanks for sharing!', '2025-02-01'),

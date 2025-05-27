@@ -16,7 +16,7 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
     List<Article> findByContentContaining(String content);
 
     @Query("SELECT a FROM Article a WHERE a.articleId IN (" +
-            "SELECT k.article FROM KeyWord k WHERE k.content IN :keywords)")
+            "SELECT k.article.articleId FROM KeyWord k WHERE k.content IN :keywords)")
     List<Article> findByKeywords(@Param("keywords") List<String> keywords);
 
     @Query("SELECT a FROM Article a WHERE a.articleId IN (" +
