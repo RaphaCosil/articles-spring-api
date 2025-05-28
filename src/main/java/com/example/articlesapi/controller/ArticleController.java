@@ -6,6 +6,7 @@ import com.example.articlesapi.dto.article.ArticlePostDto;
 import com.example.articlesapi.dto.article.ArticleUpdateDto;
 import com.example.articlesapi.exception.BadRequestException;
 import com.example.articlesapi.service.ArticleService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Tag(name = "Articles")
 @RestController
 @RequestMapping("/articles")
 public class ArticleController implements ArticleContract {

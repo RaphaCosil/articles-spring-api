@@ -6,6 +6,7 @@ import com.example.articlesapi.dto.user.UserPostDto;
 import com.example.articlesapi.dto.user.UserUpdateDto;
 import com.example.articlesapi.exception.BadRequestException;
 import com.example.articlesapi.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Tag(name = "User")
 @RestController
 @RequestMapping("/user")
 public class UserController implements UserContract {
