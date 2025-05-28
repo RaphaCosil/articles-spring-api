@@ -6,6 +6,7 @@ import com.example.articlesapi.dto.user.UserUpdateDto;
 import com.example.articlesapi.entity.User;
 import com.example.articlesapi.exception.NotFoundException;
 import com.example.articlesapi.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 import static org.hibernate.internal.util.collections.CollectionHelper.listOf;
 
+@Service
 public class UserService {
     UserRepository userRepository;
 

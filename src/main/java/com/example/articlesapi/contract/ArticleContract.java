@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/articles")
 @Tag(name = "Articles")
 public interface ArticleContract {
     @PostMapping("/")

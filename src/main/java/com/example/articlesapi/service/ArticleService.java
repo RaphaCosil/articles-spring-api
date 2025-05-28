@@ -8,10 +8,12 @@ import com.example.articlesapi.entity.User;
 import com.example.articlesapi.exception.NotFoundException;
 import com.example.articlesapi.repository.ArticleRepository;
 import com.example.articlesapi.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ArticleService {
     UserRepository userRepository;
     ArticleRepository articleRepository;

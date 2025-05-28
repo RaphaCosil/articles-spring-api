@@ -7,10 +7,12 @@ import com.example.articlesapi.entity.KeyWord;
 import com.example.articlesapi.exception.NotFoundException;
 import com.example.articlesapi.repository.ArticleRepository;
 import com.example.articlesapi.repository.KeyWordRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class KeyWordService {
     KeyWordRepository keyWordRepository;
     ArticleRepository articleRepository;

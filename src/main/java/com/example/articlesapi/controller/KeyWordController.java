@@ -7,9 +7,13 @@ import com.example.articlesapi.exception.BadRequestException;
 import com.example.articlesapi.service.KeyWordService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/keywords")
 public class KeyWordController implements KeyWordContract {
 
     KeyWordService keyWordService;

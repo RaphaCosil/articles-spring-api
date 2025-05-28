@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/keywords")
 @Tag(name = "KeyWords")
 public interface KeyWordContract {
     @PostMapping("/")
